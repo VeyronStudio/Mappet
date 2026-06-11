@@ -1,0 +1,91 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "net.minecraftforge",
+    "module": "mergetool",
+    "version": "1.0.13",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.2",
+      "buildId": "et54dgfv7jhw5dnjbhuhfxidza"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "mergetool-1.0.13.jar",
+          "url": "mergetool-1.0.13.jar",
+          "size": 28192,
+          "sha512": "e9e3a92f03da124c8aeb404bd0aba6d8957d2070449df42a3f229c2ed057d884902f1a8657dc049afd3b5e3d5b20552e67f6adb9a54db40b5b6b3a83349de542",
+          "sha256": "e8028d80b1142181248de9b554c2883e83f987c6b493bccebac6361ba9b428a3",
+          "sha1": "917b28672636d87f902e44c264b0551f9a6a4870",
+          "md5": "90ade6ae6881ad6369bd0ad11422b854"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "6.2"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-tree",
+          "version": {
+            "requires": "6.2"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-util",
+          "version": {
+            "requires": "6.2"
+          }
+        },
+        {
+          "group": "net.sf.jopt-simple",
+          "module": "jopt-simple",
+          "version": {
+            "requires": "5.0.4"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mergetool-1.0.13.jar",
+          "url": "mergetool-1.0.13.jar",
+          "size": 28192,
+          "sha512": "e9e3a92f03da124c8aeb404bd0aba6d8957d2070449df42a3f229c2ed057d884902f1a8657dc049afd3b5e3d5b20552e67f6adb9a54db40b5b6b3a83349de542",
+          "sha256": "e8028d80b1142181248de9b554c2883e83f987c6b493bccebac6361ba9b428a3",
+          "sha1": "917b28672636d87f902e44c264b0551f9a6a4870",
+          "md5": "90ade6ae6881ad6369bd0ad11422b854"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+[
+    {
+        "modid": "mappet",
+        "name": "Mappet",
+        "description": "Adventure map toolset mod",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "https://www.curseforge.com/minecraft/mc-mods/mappet/",
+        "updateUrl": "https://raw.githubusercontent.com/mchorse/mappet/master/version.json",
+        "authorList": ["mchorse"],
+        "credits": "Andruxioid for suggesting the mod's name, and CustomNPCs Forever VK group for suggesting the mod idea! Also thanks to Evanechecssss for implementation of a couple of features.",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    },
+    {
+        "modid": "mappetextras",
+        "name": "MappetExtras",
+        "description": "Addon that contains many useful features for Mappet",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "https://github.com/TorayLife/MappetExtras",
+        "updateJSON": "https://raw.githubusercontent.com/TorayLife/MappetExtras/master/version.json",
+        "authorList": [
+            "TorayLife",
+            "Llama"
+        ],
+        "credits": "Special thanks to McHorse, dyamo, OtakuGamer, TorayLife for helping and supporting!",
+        "logoFile": "logo.png",
+        "screenshots": ["logo.png"],
+        "useDependencyInformation": true,
+        "requiredMods": [
+            "mappet",
+            "mixinbooter"
+        ],
+        "dependencies": [
+            "mappet"
+        ]
+    }
+]

@@ -1,0 +1,56 @@
+package toraylife.mappetextras.modules.veyron.scripts.user;
+
+public interface IScriptVeyron
+{
+    public int getFear();
+    public IScriptVeyron setFear(int value);
+    public IScriptVeyron addFear(int value);
+    public int getMaxFear();
+    public IScriptVeyron setMaxFear(int value);
+    public IScriptVeyron setFearEffects(boolean enabled);
+    public IScriptVeyron setVisionLevel(int level);
+    public IScriptVeyron setSoundMuffle(float value);
+    public IScriptVeyron setSpeedMultiplier(float value);
+    public int getTension();
+    public IScriptVeyron setTension(int value);
+    public IScriptVeyron setZone(String zone);
+    public IScriptVeyron clearZone(String zone);
+    public boolean isInZone(String zone);
+    public IScriptVeyron lockAction(String action);
+    public IScriptVeyron unlockAction(String action);
+    public IScriptVeyron clearLockedActions();
+    public boolean isActionLocked(String action);
+    public IScriptVeyron setNoise(String type, int power);
+    public int getNoise(String type);
+    public IScriptVeyron clearNoise(String type);
+    public IScriptVeyron jumpscare(String id, String condition);
+    public String getJumpscare(String condition);
+    public IScriptVeyron clearJumpscare(String condition);
+    public IScriptVeyron playAmbient(String sound, float volume, float pitch);
+    public IScriptVeyron playRandomNear(String sound, double minDistance, double maxDistance, float volume, float pitch);
+    public IScriptVeyron playMusic(String sound);
+    public IScriptVeyron stopMusic();
+    public IScriptVeyron fadeMusic(String sound, int ticks);
+    public IScriptVeyron setScreenDarkness(float value);
+    public IScriptVeyron setScreenBlur(float value);
+    public IScriptVeyron clearScreenEffects();
+    public IScriptVeyron fakeMessage(String message);
+    public IScriptVeyron fakeTitle(String title);
+    public IScriptVeyron fakeSubtitle(String subtitle);
+    public IScriptVeyron fakeTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut);
+    public IScriptVeyron fakeActionBar(String message);
+    public IScriptVeyron showQuestHUD(boolean enabled);
+    public IScriptVeyron trackQuest(String questId);
+    public IScriptVeyron clearTrackedQuest();
+    public IScriptVeyron startTimer(String id, int ticks);
+    public IScriptVeyron startTimerSeconds(String id, int seconds);
+    public IScriptVeyron addTimer(String id, int ticks);
+    public IScriptVeyron pauseTimer(String id);
+    public IScriptVeyron resumeTimer(String id);
+    public IScriptVeyron stopTimer(String id);
+    public boolean hasTimer(String id);
+    public int getTimer(String id);
+    public boolean isTimerFinished(String id);
+    public String formatTimer(String id);
+    public IScriptVeyron reset();
+}

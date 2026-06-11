@@ -1,0 +1,1 @@
+﻿<project><modelVersion>4.0.0</modelVersion><groupId>io.netty</groupId><artifactId>netty-transport-classes-epoll</artifactId><version>4.1.82.Final</version></project>

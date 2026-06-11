@@ -1,0 +1,131 @@
+#PARSE_ESCAPES
+
+# CONFIG
+mappetextras.config.title=Маппет Экстрас
+
+mappetextras.config.main_module.title=Главный модуль
+mappetextras.config.main_module.tooltip=Настройки главного модуля
+
+mappetextras.config.main_module.show_version_update_message=Показывать сообщение об обновлении
+mappetextras.config.comments.main_module.show_version_update_message=Определяет, будет ли выводиться сообщение о версии мода.
+mappetextras.config.main_module.show_update_only_if_outdated=Показывать сообщение об обновлении только если есть новая версия
+mappetextras.config.comments.main_module.show_update_only_if_outdated=Показывает сообщение об обновлении только если текущая версия устарела.
+
+mappetextras.config.utils_module.title=Модуль утилит
+mappetextras.config.utils_module.tooltip=Настройки модуля утилит
+
+mappetextras.config.utils_module.code_search.title=Поиск по коду
+mappetextras.config.utils_module.code_search.tooltip=Настройки поиска по коду
+mappetextras.config.utils_module.code_search.code_search_color=Цвет подсветки
+mappetextras.config.comments.utils_module.code_search.code_search_color=Определяет, каким цветом будет выделяться текст при поиске по коду.
+mappetextras.config.utils_module.code_search.code_search_background_color=Цвет фона панели 
+mappetextras.config.comments.utils_module.code_search.code_search_background_color=Определяет какого цвета будет фон у панели поиска.
+mappetextras.config.utils_module.code_search.code_search_on_top=Панель наверху
+mappetextras.config.comments.utils_module.code_search.code_search_on_top=Если включено, панель поиска будет располагаться наверху.
+
+mappetextras.config.utils_module.beautifier.title=Улучшалка кода :)
+mappetextras.config.utils_module.beautifier.tooltip=Настройки улучшалки
+mappetextras.config.utils_module.beautifier.indent_empty_lines=Отступы для пустых строк
+mappetextras.config.comments.utils_module.beautifier.indent_empty_lines=Делать отступы для пустых строк
+mappetextras.config.utils_module.beautifier.unindent_chained_methods=Отвязка цепочек методов
+mappetextras.config.comments.utils_module.beautifier.unindent_chained_methods=Не делать отступов для вызовов цепочек методов
+mappetextras.config.utils_module.beautifier.break_chained_methods=Разорвать цепочку методов
+mappetextras.config.comments.utils_module.beautifier.break_chained_methods=Разбивать вызовы цепных методов на последующие строки
+
+mappetextras.config.utils_module.dimensions.title=Измерения
+mappetextras.config.utils_module.dimensions.tooltip=Настройки измерений
+mappetextras.config.utils_module.dimensions.flat_dimension_id=ID плоского измерения
+mappetextras.config.comments.utils_module.dimensions.flat_dimension_id=Изменяйте только если встретились с несовместимостью с другим модом.
+mappetextras.config.utils_module.dimensions.void_dimension_id=ID пустого измерения
+mappetextras.config.comments.utils_module.dimensions.void_dimension_id=Изменяйте только если встретились с несовместимостью с другим модом.
+
+mappetextras.config.scripts.title=Скрипты
+mappetextras.config.scripts.tooltip=Настройки скриптов
+
+mappetextras.config.scripts.scriptsFolderPath=Путь к скриптам
+mappetextras.config.comments.scripts.scriptsFolderPath=Если в пути не указан диск, то путь начинается с текущей папки Minecraft. Обязательно перезайдите в мир!
+
+mappetextras.config.scripts.defaultTextScript=Текст по умолчанию
+mappetextras.config.comments.scripts.defaultTextScript=Код при создании скрипта.
+
+# MAIN
+mappetextras.main_module.update.up_to_date=[§6%s§f] §7У вас установлена последняя версия.
+mappetextras.main_module.update.outdated=[§6%s§f] §7Новая версия §e%s§7 уже доступна (ваша текущая версия §e%s§7).
+mappetextras.main_module.update.outdated_view=§f [§9Посмотреть список обновлений§f]
+mappetextras.main_module.update.outdated_tooltip=§7Нажмите сюда чтобы увидеть обновления
+mappetextras.main_module.update.failed=[§6%s§f] §7Не удалось проверить обновления.
+mappetextras.main_module.update.screen_title=Обновления: Текущая версия - §e%s§f, последняя версия - §e%s§f
+mappetextras.main_module.update.button_update_link=Посетить страницу мода
+
+# CLIENT
+# GUI
+mappetextras.gui.panels.dimensions=Измерения
+mappetextras.gui.dimensions.id=ID измерения
+mappetextras.gui.dimensions.initializeOnStartup=Инициализировать при запуске сервера
+mappetextras.gui.dimensions.worldProvider=Провайдер мира
+mappetextras.utils.dimensions.registerDimension=Зарегистрировать измерение
+mappetextras.utils.dimensions.unregisterDimension=Убрать регистрацию измерения
+mappetextras.utils.dimensions.tpToDimension=Телепортироваться в измерение
+mappetextras.utils.dimensions.tpToOverworld=Телепортироваться в обычный мир
+
+# SCRIPTING
+
+# UTILS
+mappetextras.error=§cОшибка
+mappetextras.todo=§cЗАПЛАНИРОВАНО / НЕ РЕАЛИЗОВАНО
+mappetextras.utils.codesearch.search=Искать
+mappetextras.utils.codesearch.replace=Заменить
+mappetextras.utils.codesearch.close=Закрыть
+mappetextras.utils.codesearch.replace_all=Заменить всё
+mappetextras.utils.codesearch.regex=Регулярное выражение
+mappetextras.utils.codesearch.ignore_case=Игнорировать регистр
+mappetextras.utils.codesearch.search_and_replace=Поиск и замена
+mappetextras.utils.saveEntry.save=Сохранить
+
+mappetextras.utils_module.beautify=Улучшалка кода :)
+
+# ITEMS
+item.mappetextras.npc_picker.name=НПС пипетка
+item.mappetextras.npc_picker.tooltip=Этот инструмент позволяет сохранять НПС.
+item.mappetextras.npc_picker.message.savednpc=[§6НПС пипетка§r] §7НПС сохранён с id: §6%s§f
+item.mappetextras.npc_picker.message.notid=[§6НПС пипетка§r] §cУ НПС не установлен id.
+
+item.mappetextras.npc_soulstone.name=НПС камень души
+item.mappetextras.npc_soulstone.tooltip=Этот инструмент позволяет сохранять НПС внутри предмета.
+
+# TRIGGERS
+mappet.gui.settings.triggers.player_tick=Игрок: при тике
+mappet.gui.settings.triggers.descriptions.player_tick=Этот триггер срабатывает во время тика игрока (также как и серверный тик, но имеет игрока в своём контексте).
+mappet.gui.settings.triggers.variables.player_tick=N/A
+
+mappet.gui.settings.triggers.player_walking=Игрок: при ходьбе
+mappet.gui.settings.triggers.descriptions.player_walking=Этот триггер срабатывает каждый тик когда игрок движется.
+mappet.gui.settings.triggers.variables.player_walking=§6onGround§r, 1 если игрок стоит на земле, 0 если нет.
+
+mappet.gui.settings.triggers.player_open_gui=Игрок: при открытии GUI
+mappet.gui.settings.triggers.descriptions.player_open_gui=Этот триггер срабатывает когда игрок открывает GUI.
+mappet.gui.settings.triggers.variables.player_open_gui=§6gui§r, название GUI.
+
+mappet.gui.settings.triggers.player_close_gui=Игрок: при закрытии GUI
+mappet.gui.settings.triggers.descriptions.player_close_gui=Этот триггер срабатывает когда игрок закрывает GUI.
+mappet.gui.settings.triggers.variables.player_close_gui=§6gui§r, название GUI.
+
+mappet.gui.settings.triggers.living_jump=Живое: при прыжке
+mappet.gui.settings.triggers.descriptions.living_jump=Этот триггер срабатывает когда живая сущность прыгает.
+mappet.gui.settings.triggers.variables.living_jump=N/A
+
+mappet.gui.settings.triggers.living_fall=Живое: при падении
+mappet.gui.settings.triggers.descriptions.living_fall=Этот триггер срабатывает когда живая сущность падает.
+mappet.gui.settings.triggers.variables.living_fall=§6distance§r, расстояние, которое пролетела сущность падая.\n§6damageMultiplier§r, множитель урона от падения.
+
+mappet.gui.settings.triggers.player_eat=Игрок: при поедании еды
+mappet.gui.settings.triggers.descriptions.player_eat=Этот триггер срабатывает, когда игрок ест еду.
+mappet.gui.settings.triggers.variables.player_eat=N/A
+
+mappet.gui.settings.triggers.player_drink=Игрок: при питье зелья
+mappet.gui.settings.triggers.descriptions.player_drink=Этот триггер срабатывает, когда игрок выпивает зелье.
+mappet.gui.settings.triggers.variables.player_drink=N/A
+
+mappet.gui.settings.triggers.player_dimension_change=Игрок: изменение измерения
+mappet.gui.settings.triggers.descriptions.player_dimension_change=Этот триггер срабатывает, когда игрок меняет измерение
+mappet.gui.settings.triggers.variables.player_dimension_change=§6fromDim§r, ID измерения, из которого игрок перемещается\n§6toDim§r, ID измерения, в которое игрок перемещается

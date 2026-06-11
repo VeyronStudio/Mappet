@@ -1,0 +1,22 @@
+Initialized native services in: C:\Users\timur\.gradle\native
+Initialized jansi services in: C:\Users\timur\.gradle\native
+To honour the JVM settings for this build a single-use Daemon process will be forked. See https://docs.gradle.org/7.4.2/userguide/gradle_daemon.html#sec:disabling_the_daemon.
+Starting process 'Gradle build daemon'. Working directory: C:\Users\timur\.gradle\daemon\7.4.2 Command: C:\Program Files\Java\jre1.8.0_491\bin\java.exe -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -Xms256m -Xmx512m -Dfile.encoding=windows-1251 -Duser.country=RU -Duser.language=ru -Duser.variant -cp C:\Users\timur\.gradle\wrapper\dists\gradle-7.4.2-bin\7y76f9aqedog91pddzza81ymn\gradle-7.4.2\lib\gradle-launcher-7.4.2.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 7.4.2
+Successfully started process 'Gradle build daemon'
+An attempt to start the daemon took 1.078 secs.
+The client will now receive all logging from the daemon (pid: 4316). The daemon log file: C:\Users\timur\.gradle\daemon\7.4.2\daemon-4316.out.log
+Closing daemon's stdin at end of input.
+The daemon will no longer process any standard input.
+Daemon will be stopped at the end of the build 
+Using 12 worker leases.
+Watching the file system is configured to be enabled if available
+Now considering [C:\Users\timur\Desktop\Mappet\Mappet] as hierarchies to watch
+File system watching is active
+Starting Build
+Settings evaluated using settings file 'C:\Users\timur\Desktop\Mappet\Mappet\settings.gradle'.
+Projects loaded. Root project using build file 'C:\Users\timur\Desktop\Mappet\Mappet\build.gradle'.
+Included projects: [root project 'Mappet']
+
+> Configure project :
+Evaluating root project 'Mappet' using build file 'C:\Users\timur\Desktop\Mappet\Mappet\build.gradle'.
+

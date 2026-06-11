@@ -1,0 +1,136 @@
+#PARSE_ESCAPES
+
+# CONFIG
+mappetextras.config.title=Mappet Extras
+
+mappetextras.config.main_module.title=Main module
+mappetextras.config.main_module.tooltip=Main module mod options
+
+mappetextras.config.main_module.show_version_update_message=Show version update message
+mappetextras.config.comments.main_module.show_version_update_message=Determines whether Mappet Extras send message about version.
+mappetextras.config.main_module.show_update_only_if_outdated=Send update message only if outdated
+mappetextras.config.comments.main_module.show_update_only_if_outdated=Only show the version update message if the current version is outdated.
+
+mappetextras.config.utils_module.title=Utils module
+mappetextras.config.utils_module.tooltip=Utils module mod options
+
+mappetextras.config.utils_module.code_search.title=Code search
+mappetextras.config.utils_module.code_search.tooltip=Code search options
+mappetextras.config.utils_module.code_search.code_search_color=Highlight color
+mappetextras.config.comments.utils_module.code_search.code_search_color=Defines what colour the text will be highlighted in when searching by code.
+mappetextras.config.utils_module.code_search.code_search_background_color=Panel background color
+mappetextras.config.comments.utils_module.code_search.code_search_background_color=Determines what colour the background of the search panel will be.
+mappetextras.config.utils_module.code_search.code_search_on_top=Panel on top
+mappetextras.config.comments.utils_module.code_search.code_search_on_top=If enabled, the search bar will be at the top.
+
+mappetextras.config.utils_module.beautifier.title=Beautifier
+mappetextras.config.utils_module.beautifier.tooltip=Beautifier (code improver) options
+mappetextras.config.utils_module.beautifier.indent_empty_lines=Indent empty lines
+mappetextras.config.comments.utils_module.beautifier.indent_empty_lines=Make indents for empty lines.
+mappetextras.config.utils_module.beautifier.unindent_chained_methods=Unindent chained methods
+mappetextras.config.comments.utils_module.beautifier.unindent_chained_methods=Don't indent chained method calls
+mappetextras.config.utils_module.beautifier.break_chained_methods=Break chained methods
+mappetextras.config.comments.utils_module.beautifier.break_chained_methods=Break chained method calls across subsequent lines
+
+mappetextras.config.utils_module.dimensions.title=Dimensions
+mappetextras.config.utils_module.dimensions.tooltip=Dimensions options
+mappetextras.config.utils_module.dimensions.flat_dimension_id=Flat dimension ID
+mappetextras.config.comments.utils_module.dimensions.flat_dimension_id=Change only if you face incompatibility with another mod.
+mappetextras.config.utils_module.dimensions.void_dimension_id=Void dimension ID
+mappetextras.config.comments.utils_module.dimensions.void_dimension_id=Change only if you face incompatibility with another mod.
+
+mappetextras.config.scripts.title=Scripts
+mappetextras.config.scripts.tooltip=Script settings
+
+mappetextras.config.scripts.scriptsFolderPath=Path to scripts
+mappetextras.config.comments.scripts.scriptsFolderPath=If the path does not specify a drive, then the path starts from the current Minecraft folder. Be sure to re-enter the world!
+
+mappetextras.config.scripts.defaultTextScript=The default text
+mappetextras.config.comments.scripts.defaultTextScript=Default script
+
+# MAIN
+mappetextras.main_module.update.up_to_date=[§6%s§f] §7You have the latest version installed.
+mappetextras.main_module.update.outdated=[§6%s§f] §7A new version §e%s§7 is now available (your current version is §e%s§7).
+mappetextras.main_module.update.outdated_view=§f [§9View updates§f]
+mappetextras.main_module.update.outdated_tooltip=§7Click here to view the updates
+mappetextras.main_module.update.failed=[§6%s§f] §7Failed to check for updates.
+mappetextras.main_module.update.screen_title=Updates: Current version - §e%s§f, latest version - §e%s§f
+mappetextras.main_module.update.button_update_link=Visit mod page
+
+# CLIENT
+# GUI
+mappetextras.gui.panels.dimensions=Dimensions
+mappetextras.gui.dimensions.id=Dimension id
+mappetextras.gui.dimensions.initializeOnStartup=Initialize on startup
+mappetextras.gui.dimensions.worldProvider=World provider
+mappetextras.utils.dimensions.registerDimension=Register dimension
+mappetextras.utils.dimensions.unregisterDimension=Unregister dimension
+mappetextras.utils.dimensions.tpToDimension=TP to dimension
+mappetextras.utils.dimensions.tpToOverworld=TP to overworld
+
+
+# SCRIPTING
+
+# UTILS
+mappetextras.error=§cError
+mappetextras.todo=§cTO-DO / NOT IMPLEMENTED
+mappetextras.utils.codesearch.search=Search
+mappetextras.utils.codesearch.replace=Replace
+mappetextras.utils.codesearch.close=Close
+mappetextras.utils.codesearch.replace_all=Replace all
+mappetextras.utils.codesearch.regex=Regular expression
+mappetextras.utils.codesearch.ignore_case=Ignore case
+mappetextras.utils.codesearch.search_and_replace=Search and replace
+mappetextras.utils.saveEntry.save=Save
+
+mappetextras.utils_module.beautify=Beautify
+
+
+
+
+
+# ITEMS
+item.mappetextras.npc_picker.name=NPC picker
+item.mappetextras.npc_picker.tooltip=This tool allows save NPCs.
+item.mappetextras.npc_picker.message.savednpc=[§6NPC Picker§r] §7NPC is saved under id: §6%s§f
+item.mappetextras.npc_picker.message.notid=[§6NPC Picker§r] §cNPC doesn't have an id.
+
+item.mappetextras.npc_soulstone.name=NPC soulstone
+item.mappetextras.npc_soulstone.tooltip=This tool allows you to save NPC inside an item.
+
+# TRIGGERS
+mappet.gui.settings.triggers.player_tick=Player: ticking
+mappet.gui.settings.triggers.descriptions.player_tick=This trigger gets triggered when player ticks (same as server ticking, but have a player in its context).
+mappet.gui.settings.triggers.variables.player_tick=N/A
+
+mappet.gui.settings.triggers.player_walking=Player: walking
+mappet.gui.settings.triggers.descriptions.player_walking=This trigger gets triggered every tick when a player moving while standing on ground.
+mappet.gui.settings.triggers.variables.player_walking=§6onGround§r, 1 if player on ground, 0 if not.
+
+mappet.gui.settings.triggers.player_open_gui=Player: opened GUI
+mappet.gui.settings.triggers.descriptions.player_open_gui=This trigger fires when the player open the GUI(except for containers).
+mappet.gui.settings.triggers.variables.player_open_gui=§6gui§r, name GUI.
+
+mappet.gui.settings.triggers.player_close_gui=Player: closed GUI
+mappet.gui.settings.triggers.descriptions.player_close_gui=This trigger fires when the player close the GUI(except for containers).
+mappet.gui.settings.triggers.variables.player_close_gui=§6gui§r, name GUI.
+
+mappet.gui.settings.triggers.living_jump=Living: jump
+mappet.gui.settings.triggers.descriptions.living_jump=This trigger gets triggered when living entity jump.
+mappet.gui.settings.triggers.variables.living_jump=N/A
+
+mappet.gui.settings.triggers.living_fall=Living: fall
+mappet.gui.settings.triggers.descriptions.living_fall=This trigger fires when a living entity falls.
+mappet.gui.settings.triggers.variables.living_fall=§6distance§r, the distance the entity traveled when it fell.\n§6damageMultiplier§r, the damage multiplier of the fall.
+
+mappet.gui.settings.triggers.player_eat=Player: eat
+mappet.gui.settings.triggers.descriptions.player_eat=This trigger fires when the player eats food
+mappet.gui.settings.triggers.variables.player_eat=N/A
+
+mappet.gui.settings.triggers.player_drink=Player: drink
+mappet.gui.settings.triggers.descriptions.player_drink=This trigger fires when the player drink potion
+mappet.gui.settings.triggers.variables.player_drink=N/A
+
+mappet.gui.settings.triggers.player_dimension_change=Player: change dimension
+mappet.gui.settings.triggers.descriptions.player_dimension_change=This trigger fires when the player changes dimension
+mappet.gui.settings.triggers.variables.player_dimension_change=§6fromDim§r, the ID of the dimension from which the player is traveling\n§6toDim§r, the ID of the dimension to which the player is traveling

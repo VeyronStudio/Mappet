@@ -1,0 +1,455 @@
+buildscript {
+    def localMaven = new File(rootDir, "local-maven")
+    def minecraftLibraries = new File(System.getProperty("user.home"), "AppData/Roaming/.minecraft/libraries")
+    repositories {
+        maven { url = uri(localMaven) }
+        maven { url = uri(minecraftLibraries) }
+        maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = "https://repo.spongepowered.org/maven" }
+        mavenCentral()
+        jcenter()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:5.1.73'
+        classpath "org.apache.maven.plugins:maven-resources-plugin:3.2.0"
+        classpath 'gradle.plugin.com.github.johnrengelman:shadow:7.1.2'
+        classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: "org.spongepowered.mixin"
+
+var dev = "dev"
+
+if (project.hasProperty("dev")) {
+    version += "-" + dev
+}
+
+group = "mchorse.mappet"
+archivesBaseName = "mappet"
+sourceCompatibility = targetCompatibility = "1.8"
+compileJava.options.encoding = 'UTF-8'
+
+mixin {
+    add sourceSets.main, "mixins.mappetextras.refmap.json"
+    disableAnnotationProcessorCheck()
+}
+
+def mixinFiles = [
+        'mixins/mixins.late.main.json',
+        'mixins/mixins.late.utils.json',
+        'mixins/mixins.late.client.json',
+        'mixins/mixins.late.scripting.json',
+        'mixins/mixins.early.scripting.json',
+        'mixins/mixins.early.utils.json'
+]
+
+def mixins = [
+        "--tweakClass",
+        "org.spongepowered.asm.launch.MixinTweaker",
+]
+
+mixinFiles.forEach {
+    mixins.add("--mixin")
+    mixins.add(it)
+}
+
+minecraft {
+
+    mappings channel: 'snapshot', version: '20171003-1.12'
+
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+
+    accessTransformer = file('src/main/resources/META-INF/mappet_at.cfg')
+
+    // Default run configurations.
+    // These can be tweaked, removed, or duplicated as needed.
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            property 'forge.logging.console.level', 'debug'
+
+            jvmArgs("-Xmx1G")
+
+            args mixins
+        }
+
+        server {
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            property 'forge.logging.console.level', 'debug'
+
+            jvmArgs("-Xmx1G")
+
+            args mixins
+        }
+    }
+}
+
+repositories {
+    def localMaven = new File(rootDir, "local-maven")
+    def minecraftLibraries = new File(System.getProperty("user.home"), "AppData/Roaming/.minecraft/libraries")
+    exclusiveContent {
+        forRepository {
+            maven { url = uri(localMaven) }
+        }
+        filter {
+            includeModule("net.minecraftforge", "legacydev")
+            includeModule("org.lwjgl.lwjgl", "lwjgl-platform")
+        }
+    }
+    maven { url = uri(localMaven) }
+    maven { url = uri(minecraftLibraries) }
+    mavenCentral()
+    maven {
+        url = "https://repo.spongepowered.org/maven"
+        content {
+            includeGroup "org.spongepowered"
+        }
+    }
+    maven { url = "https://maven.cleanroommc.com" }
+}
+
+dependencies {
+    // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
+    // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
+    // The userdev artifact is a special name and will get all sorts of transformations applied to it.
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+
+    compileOnly files("run/libs/blockbuster-${blockbuster}-${mcversion}-dev.jar")
+    compileOnly files("run/libs/metamorph-${metamorph}-${mcversion}-dev.jar")
+    compileOnly files("run/libs/mclib-${mclib}-${mcversion}-dev.jar")
+    compileOnly files("run/libs/aperture-${aperture}-${mcversion}-dev.jar")
+    compileOnly files("run/libs/chameleon-${chameleon}-dev.jar")
+    implementation("org.reflections:reflections:0.10.2")
+    implementation("net.minecraftforge:mergetool:0.2.3.3") { force = true }
+    implementation 'zone.rong:mixinbooter:7.1'
+
+    String mixin = 'org.spongepowered:mixin:0.8.3'
+    implementation (mixin) {
+        transitive = false
+    }
+    annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
+    annotationProcessor 'com.google.guava:guava:24.1.1-jre'
+    annotationProcessor 'com.google.code.gson:gson:2.8.6'
+    annotationProcessor (mixin) {
+        transitive = false
+    }
+
+    // You may put jars on which you depend on in ./libs or you may define them like so..
+    // compile "some.group:artifact:version:classifier"
+    // compile "some.group:artifact:version"
+
+    // Real examples
+    // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+    // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+
+    // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
+    // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+
+    // These dependencies get remapped to your current MCP mappings
+    // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+
+    // For more info...
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+}
+
+// Example for how to get properties into the manifest for reading by the runtime...
+jar {
+    from("$buildDir/tmp/compileJava") {
+        include "mixins.mappetextras.refmap.json"
+    }
+
+    manifest {
+        attributes([
+                "Implementation-Title"       : project.name,
+                "Implementation-Version"     : project.version,
+                "Implementation-Timestamp"   : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "TweakClass"                 : "org.spongepowered.asm.launch.MixinTweaker",
+                "FMLCorePlugin"              : "zone.rong.mixinbooter.MixinBooterPlugin",
+                "MixinConfigs"               : mixinFiles.findAll { it.contains("early") }.join(","),
+                "FMLCorePluginContainsFMLMod": true,
+                "ForceLoadAsMod"             : true,
+        ])
+    }
+}
+
+// Example configuration to allow publishing using the maven-publish task
+// This is the preferred method to reobfuscate your jar file
+jar.finalizedBy('shadowJar')
+jar.finalizedBy('reobfJar')
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
+//publish.dependsOn('reobfJar')
+
+
+// BY DYAMO BOLSHOY UMNI MALCHEG
+import org.apache.tools.ant.filters.ReplaceTokens
+
+task processSource(type: Sync) {
+    outputs.upToDateWhen { false }
+
+    from sourceSets.main.java
+    filter(ReplaceTokens, tokens: [
+            MAPPET     : version,
+            MCLIB      : mclib,
+            METAMORPH  : metamorph,
+            BLOCKBUSTER: blockbuster,
+            APERTURE   : aperture,
+            VERSION    : version,
+            MIXINBOOTER: mixinbooter,
+    ])
+    into "$buildDir/src"
+}
+
+compileJava {
+    source = processSource.outputs
+}
+
+shadowJar {
+    dependsOn compileJava
+
+    from("$buildDir/tmp/compileJava") {
+        include "mixins.mappetextras.refmap.json"
+    }
+
+    dependencies {
+        include(dependency("org.reflections:reflections:0.10.2"))
+        include(dependency("org.slf4j:slf4j-api:1.7.32"))
+        include(dependency("org.javassist:javassist:3.28.0-GA"))
+        include(dependency("zone.rong:mixinbooter:7.1"))
+    }
+    archiveClassifier.set("")
+
+    var dependenciesToRelocate = [
+            "org.reflections",
+            "org.slf4j",
+            "javassist"
+    ]
+
+    for (dependency in dependenciesToRelocate) {
+        relocate dependency, "mchorse.mappet.libs." + dependency
+    }
+}
+
+task prepareAssets(type: Copy) {
+    group = 'build'
+
+    inputs.property 'version', project.version
+    inputs.property "mcversion", mcversion
+
+    project.version += "-" + mcversion
+
+    from (sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        // Replace version
+        expand(project.properties)
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+
+    into project.file('build/classes/java/main')
+}
+
+classes.dependsOn(prepareAssets)
+
+tasks.withType(Jar).all { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }
+
+/* Dev build */
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+artifacts {
+    archives deobfJar
+    archives sourcesJar
+}
+
+task scriptingJavadocs(type: Javadoc) {
+    source = sourceSets.main.allJava
+
+    include "mchorse/mappet/api/ui/components/**"
+    include "mchorse/mappet/client/gui/utils/graphics/Graphic**"
+    include "mchorse/mappet/api/scripts/user/**"
+}
+
+task scriptingJavadocsJson(type: Exec) {
+    // Writing gradle tasks is PAIN, if you'll ever would need to run this, clone and build:
+    // https://github.com/mchorse/jsonDoclet
+    //
+    // Rename it to jsonDoclet.jar, and place it in the run/ folder
+    executable "javadoc"
+    args "-doclet", "mchorse.utils.doclets.JsonDoclet", "-docletpath", "./run/jsonDoclet.jar", "-sourcepath", "./src/main/java/", "-subpackages", "mchorse.mappet.api.scripts.user:mchorse.mappet.api.ui.components:mchorse.mappet.client.gui.utils.graphics"
+
+    doLast {
+        file("src/main/resources/assets/mappet/docs.json").setText(file("docs.json").text)
+    }
+}
+
+task scriptingExtrasJavadocsJson(type: Exec) {
+    executable "javadoc"
+    args "-doclet", "mchorse.utils.doclets.JsonDoclet", "-docletpath", "./run/jsonDoclet.jar", "-sourcepath", "./src/main/java/", "-subpackages", [
+            "toraylife.mappetextras.modules.scripting.scripts.user",
+            "toraylife.mappetextras.modules.scripting.mixins.late",
+            "toraylife.mappetextras.modules.client.mixins.late"
+    ].join(":")
+
+    doLast {
+        def docs = file("src/main/resources/assets/mappetextras/docs.json")
+        docs.parentFile.mkdirs()
+        docs.setText(file("docs.json").text)
+    }
+}
+
+tasks.processResources.dependsOn(scriptingJavadocsJson, scriptingExtrasJavadocsJson)
+
+/* Comparing keys */
+task compareLangFiles {
+    doLast {
+        def help = file("src/main/resources/assets/${project.archivesBaseName}/lang/")
+        def parse = { File file ->
+            def map = new HashMap()
+            def splits = file.text.split("\n");
+
+            for (split in splits) {
+                def index = split.indexOf("=")
+
+                if (index == -1) {
+                    continue
+                }
+
+                map.put(split.substring(0, index), true)
+            }
+
+            return map
+        }
+
+        if (!help.exists()) {
+            return
+        }
+
+        def en = file("${help.getAbsolutePath()}/en_US.lang")
+        def en_map = parse(en)
+
+        for (lang_file in help.listFiles()) {
+            if (!lang_file.name.endsWith(".lang") || lang_file.name.startsWith("en_US")) {
+                continue
+            }
+
+            def lang_map = parse(lang_file)
+            def missing = new ArrayList()
+            def extra = new ArrayList()
+
+            for (key in en_map.keySet()) {
+                if (!lang_map.containsKey(key)) {
+                    missing.add(key)
+                }
+            }
+
+            for (key in lang_map.keySet()) {
+                if (!en_map.containsKey(key)) {
+                    extra.add(key)
+                }
+            }
+
+            missing.sort()
+            extra.sort()
+
+            print("\n")
+
+            if (!missing.isEmpty() || !extra.isEmpty()) {
+                if (!missing.isEmpty()) {
+                    print("Language file ${lang_file.getName()} misses following keys:\n")
+
+                    for (key in missing) {
+                        print("- ${key}\n")
+                    }
+                }
+
+                if (!extra.isEmpty()) {
+                    print("Language file ${lang_file.getName()} has additional keys:\n")
+
+                    for (key in extra) {
+                        print("- ${key}\n")
+                    }
+                }
+            } else {
+                print("Language file ${lang_file.getName()} fully matches ${en.getName()}!\n")
+            }
+        }
+    }
+}
+
+task copyLangStrings {
+    doLast {
+        def parse = { File file ->
+            def map = new HashMap()
+            def splits = file.text.split("\n");
+
+            for (split in splits) {
+                def index = split.indexOf("=")
+
+                if (index == -1) {
+                    continue
+                }
+
+                map.put(split.substring(0, index), split.substring(index + 1))
+            }
+
+            return map
+        }
+
+        def help = file("src/main/resources/assets/${project.archivesBaseName}/lang/")
+        def en = file("${help.getAbsolutePath()}/en_US.lang")
+
+        for (file in help.listFiles()) {
+            if (file.name.endsWith(".lang") && !file.name.startsWith("en_")) {
+                def strings = parse(file)
+                def splits = en.text.split("\n")
+
+                for (def i = 0; i < splits.length; i++) {
+                    def str = splits[i];
+
+                    if (str.contains("=")) {
+                        def index = str.indexOf("=")
+                        def key = str.substring(0, index)
+                        def value = str.substring(index)
+
+                        if (strings.containsKey(key)) {
+                            splits[i] = key + "=" + strings.get(key)
+                        }
+                    }
+                }
+
+                file.write(splits.join("\n"))
+
+                print("Wrote to ${file.name}...")
+            }
+        }
+
+        print("Done!")
+    }
+}
+
+tasks.register('openBuiltJarsDir', Exec) {
+    group = 'build'
+    description = 'Opens the build/libs directory in Explorer'
+
+    commandLine "cmd", "/c", "explorer ${projectDir}\\build\\libs"
+    ignoreExitValue true
+}
