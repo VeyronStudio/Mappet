@@ -306,7 +306,8 @@ task scriptingExtrasJavadocsJson(type: Exec) {
     args "-doclet", "mchorse.utils.doclets.JsonDoclet", "-docletpath", "./run/jsonDoclet.jar", "-sourcepath", "./src/main/java/", "-subpackages", [
             "toraylife.mappetextras.modules.scripting.scripts.user",
             "toraylife.mappetextras.modules.scripting.mixins.late",
-            "toraylife.mappetextras.modules.client.mixins.late"
+            "toraylife.mappetextras.modules.client.mixins.late",
+            "toraylife.mappetextras.modules.veyron.scripts.user"
     ].join(":")
 
     doLast {
@@ -453,3 +454,40 @@ tasks.register('openBuiltJarsDir', Exec) {
     commandLine "cmd", "/c", "explorer ${projectDir}\\build\\libs"
     ignoreExitValue true
 }
+
+// VEYRON_LOCAL_CLASSPATH_FIX_START
+//
+// Local build fix for ForgeGradle 1.12.2.
+// Full documentation generation stays enabled.
+// The fix adds mapped Forge/Minecraft jar to compileJava and javadoc classpaths.
+
+def veyronLocalMappedForgeJar = file("${buildDir}/fg_cache/net/minecraftforge/forge/1.12.2-14.23.5.2860_mapped_snapshot_20171003-1.12/forge-1.12.2-14.23.5.2860_mapped_snapshot_20171003-1.12.jar")
+def veyronLocalInjectedForgeJar = file("${buildDir}/fg_cache/net/minecraftforge/forge/1.12.2-14.23.5.2860/forge-1.12.2-14.23.5.2860-injected.jar")
+def veyronLocalForgeClasspath = files(veyronLocalMappedForgeJar, veyronLocalInjectedForgeJar)
+
+dependencies {
+    compileOnly veyronLocalForgeClasspath
+}
+
+sourceSets.main.compileClasspath += veyronLocalForgeClasspath
+
+compileJava {
+    classpath = veyronLocalForgeClasspath + classpath
+}
+
+tasks.withType(Javadoc).configureEach {
+    classpath = veyronLocalForgeClasspath + sourceSets.main.compileClasspath + classpath
+}
+
+tasks.matching { it.name == "scriptingJavadocsJson" || it.name == "scriptingExtrasJavadocsJson" }.configureEach { task ->
+    task.doFirst {
+        def cp = (veyronLocalForgeClasspath + sourceSets.main.compileClasspath).asPath
+        def currentArgs = new ArrayList(task.args ?: [])
+        if (!currentArgs.contains("-classpath")) {
+            currentArgs.add(0, cp)
+            currentArgs.add(0, "-classpath")
+            task.args = currentArgs
+        }
+    }
+}
+// VEYRON_LOCAL_CLASSPATH_FIX_END

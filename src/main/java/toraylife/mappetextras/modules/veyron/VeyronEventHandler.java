@@ -2,16 +2,31 @@ package toraylife.mappetextras.modules.veyron;
 
 import net.minecraft.block.BlockDoor;
 import net.minecraft.entity.player.EntityPlayerMP;
+import mchorse.mappet.entities.EntityNpc;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class VeyronEventHandler
 {
+    @SubscribeEvent
+    public void onServerTick(TickEvent.ServerTickEvent event)
+    {
+        if (event.phase != TickEvent.Phase.END)
+        {
+            return;
+        }
+
+        VeyronManager.serverTick(FMLCommonHandler.instance().getMinecraftServerInstance());
+    }
+
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
@@ -39,6 +54,24 @@ public class VeyronEventHandler
         if (event.player instanceof EntityPlayerMP)
         {
             VeyronManager.syncOverlay((EntityPlayerMP) event.player);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event)
+    {
+        if (event.player instanceof EntityPlayerMP)
+        {
+            VeyronManager.removePlayer(event.player.getUniqueID());
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityDeath(LivingDeathEvent event)
+    {
+        if (event.getEntityLiving() instanceof EntityNpc && !event.getEntityLiving().world.isRemote)
+        {
+            VeyronManager.removeStalker(event.getEntityLiving().getUniqueID());
         }
     }
 

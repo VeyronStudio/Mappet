@@ -171,7 +171,7 @@ public class GuiDocumentationOverlayPanel extends GuiOverlayPanel
                     ui.entries.add(docClass);
                     docClass.parent = ui;
                 }
-                else if (docLists.containsKey("veyron") && docClass.name.startsWith("veyron."))
+                else if (docLists.containsKey("veyron") && docClass.name.contains(".veyron."))
                 {
                     DocList veyron = docLists.get("veyron");
 

@@ -4,6 +4,7 @@ import mchorse.mappet.Mappet;
 import mchorse.mappet.client.gui.scripts.GuiDocumentationOverlayPanel;
 import mchorse.mappet.client.gui.scripts.utils.documentation.DocClass;
 import mchorse.mappet.client.gui.scripts.utils.documentation.DocList;
+import mchorse.mappet.client.gui.scripts.utils.documentation.DocPackage;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,7 +36,8 @@ public class MixinGuiDocumentationOverlayPanel {
         DocList veyron = new DocList();
 
         veyron.name = "Veyron API";
-        veyron.doc = GuiDocumentationOverlayPanel.docs.getPackage("veyron").doc;
+        DocPackage veyronPackage = GuiDocumentationOverlayPanel.docs.getPackage("toraylife.mappetextras.modules.veyron.scripts.user");
+        veyron.doc = veyronPackage == null ? "" : veyronPackage.doc;
         veyron.parent = topPackage;
         veyron.source = "MappetExtras";
         topPackage.entries.add(veyron);
@@ -69,7 +71,7 @@ public class MixinGuiDocumentationOverlayPanel {
             remap = false
     )
     private static void mixinsHook(CallbackInfo ci, boolean dev, Map<String, DocList> docLists, DocList topPackage, DocList scripting, DocList entities, DocList nbt, DocList items, DocList blocks, DocList ui, boolean useNewStructure, List extraPackages, List extraDocLists, Iterator var12, DocClass docClass, List<Callable<Boolean>> functions, boolean added) {
-        functions.add(() -> GuiDocumentationOverlayPanel.addWithNewStructure(input -> input.name.startsWith("veyron."), docClass, docLists.get("veyron")));
+        functions.add(() -> GuiDocumentationOverlayPanel.addWithNewStructure(input -> input.name.contains(".veyron."), docClass, docLists.get("veyron")));
         functions.add(() -> GuiDocumentationOverlayPanel.addWithNewStructure(input -> input.name.contains("triggers"), docClass, docLists.get("triggers")));
         functions.add(() -> GuiDocumentationOverlayPanel.addWithNewStructure(input -> input.name.contains("conditions"), docClass, docLists.get("conditions")));
     }
